@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.calculator.calculator.constant.Constant;
 import com.calculator.calculator.dto.OperationDto;
 import com.calculator.calculator.service.OperationService;
 
 @RestController
-@RequestMapping("/operation")
+@RequestMapping(Constant.OPERATION)
 public class CalculatorController {
 
 	private final OperationService operationService;
@@ -32,7 +33,7 @@ public class CalculatorController {
 	 * @param number2 second number
 	 * @return return the sum of number1 and number2
 	 */
-	@GetMapping("/sum")
+	@GetMapping(Constant.SUM)
 	public ResponseEntity<OperationDto> sum(@RequestParam Double number1, @RequestParam Double number2) {
 
 		OperationDto result = new OperationDto(operationService.sum(number1, number2));
@@ -47,7 +48,7 @@ public class CalculatorController {
 	 * @param number2 second number
 	 * @return return the subtract of number1 and number2
 	 */
-	@GetMapping("/subtract")
+	@GetMapping(Constant.SUBTRACT)
 	public ResponseEntity<OperationDto> subtract(@RequestParam Double number1, @RequestParam Double number2) {
 		OperationDto result = new OperationDto(operationService.subtract(number1, number2));
 		return new ResponseEntity<>(result, HttpStatus.OK);
