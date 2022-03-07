@@ -14,12 +14,15 @@ import com.calculator.calculator.service.OperationService;
 @RequestMapping("/operation")
 public class CalculatorController {
 
+	private final OperationService operationService;
+
 	/**
 	 * Construct
 	 * 
 	 * @param operationService operation interface
 	 */
 	CalculatorController(OperationService operationService) {
+		this.operationService = operationService;
 	}
 
 	/**
@@ -32,7 +35,7 @@ public class CalculatorController {
 	@GetMapping("/sum")
 	public ResponseEntity<OperationDto> sum(@RequestParam Double number1, @RequestParam Double number2) {
 
-		OperationDto result = null; // Create service
+		OperationDto result = new OperationDto(operationService.sum(number1, number2));
 		return new ResponseEntity<>(result, HttpStatus.OK);
 
 	}
@@ -46,7 +49,7 @@ public class CalculatorController {
 	 */
 	@GetMapping("/subtract")
 	public ResponseEntity<OperationDto> subtract(@RequestParam Double number1, @RequestParam Double number2) {
-		OperationDto result = null; // Create service
+		OperationDto result = new OperationDto(operationService.subtract(number1, number2));
 		return new ResponseEntity<>(result, HttpStatus.OK);
 
 	}
